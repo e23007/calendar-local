@@ -79,18 +79,13 @@ const Schedule = () => {
     window.localStorage.setItem('schedules', JSON.stringify(list))
   }
   useEffect(() => {
-    const localStorageData = window.localStorage.getItem('schedules')
-    if (localStorageData.length > 0) {
-      const localStorage = JSON.parse(localStorageData).map(schedule => {
+    const localStrageData = window.localStorage.getItem('schedules')
+    const localStorage =
+      JSON.parse(localStrageData).map(schedule => {
         schedule.created = new Date(schedule.created)
         return schedule
-      })
-      setList(localStorage)
-      console.log(localStorage.length)
-    } else {
-      setList([])
-      console.log(localStorageData.length)
-    }
+      }) ?? []
+    setList(localStorage)
   }, [])
   return (
     <Container centerContent p={{ base: '4', md: '6' }} maxWidth='3xl'>
